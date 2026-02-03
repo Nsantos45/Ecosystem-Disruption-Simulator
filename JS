@@ -1,0 +1,93 @@
+const sliders = document.querySelectorAll("input[type='range']");
+const statusBox = document.getElementById("statusBox");
+const reasoning = document.getElementById("reasoning");
+
+sliders.forEach(slider => {
+  slider.addEventListener("input", updateEcosystem);
+});
+
+function updateEcosystem() {
+  const sunlight = sunlightVal();
+  const producers = producersVal();
+  const primary = primaryVal();
+  const secondary = secondaryVal();
+
+  updateLabels();
+
+  let reasons = [];
+
+  if (sunlight < 30) {
+    reasons.push("There is not enough sunlight for producers to make food.");
+  }
+  if (producers < 30) {
+    reasons.push("Too few producers means not enough energy enters the ecosystem.");
+  }
+  if (primary > producers) {
+    reasons.push("There are more primary consumers than available producers.");
+  }
+  if (secondary > primary) {
+    reasons.push("Secondary consumers do not have enough prey to survive.");
+  }
+
+  if (reasons.length > 0) {
+    statusBox.innerText = "Unstable ❌";
+    statusBox.style.backgroundColor = "#fab1a0";
+    reasoning.innerHTML = "<strong>Why?</strong><br>" + reasons.join("<br>");
+  } else {
+    statusBox.innerText = "Stable ✅";
+    statusBox.style.backgroundColor = "#a8e6a3";
+    reasoning.innerText = "Energy is flowing normally through the food chain.";
+  }
+}
+
+function updateLabels() {
+  sunVal.innerText = sunlightVal();
+  prodVal.innerText = producersVal();
+  primVal.innerText = primaryVal();
+  secVal.innerText = secondaryVal();
+}
+
+function sunlightVal() { return +sunlight.value; }
+function producersVal() { return +producers.value; }
+function primaryVal() { return +primary.value; }
+function secondaryVal() { return +secondary.value; }
+
+// ELIMINATION ACTIVITY
+function checkElimination() {
+  const choice = eliminateChoice.value;
+  const feedback = document.getElementById("eliminationFeedback");
+
+  if (!choice) {
+    feedback.innerText = "Please select an organism to eliminate.";
+    return;
+  }
+
+  if (choice === "producer") {
+    feedback.innerHTML =
+      "✅ <strong>Correct Explanation:</strong> Without producers, energy cannot enter the ecosystem. All consumers will eventually die.";
+  }
+
+  if (choice === "primary") {
+    feedback.innerHTML =
+      "✅ <strong>Correct Explanation:</strong> Producers may increase, but secondary consumers will lose their food source and decline.";
+  }
+
+  if (choice === "secondary") {
+    feedback.innerHTML =
+      "✅ <strong>Correct Explanation:</strong> Primary consumers may increase, which can lead to overconsumption of producers.";
+  }
+}
+
+function resetEcosystem() {
+  sunlight.value = 70;
+  producers.value = 70;
+  primary.value = 50;
+  secondary.value = 30;
+  reasoning.innerText = "";
+  eliminationFeedback.innerText = "";
+  studentPrediction.value = "";
+  eliminateChoice.value = "";
+  updateEcosystem();
+}
+
+updateEcosystem();
