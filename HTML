@@ -1,0 +1,61 @@
+<h1>Ecosystem Stability Simulator</h1>
+
+<p class="directions">
+  Adjust the ecosystem or eliminate one organism. Observe how energy flow and population balance affect stability.
+</p>
+
+<section class="controls">
+  <div class="control">
+    <label>🌞 Sunlight (Energy Input)</label>
+    <input type="range" min="0" max="100" value="70" id="sunlight">
+    <span id="sunVal">70</span>
+  </div>
+
+  <div class="control">
+    <label>🌱 Producers</label>
+    <input type="range" min="0" max="100" value="70" id="producers">
+    <span id="prodVal">70</span>
+  </div>
+
+  <div class="control">
+    <label>🐇 Primary Consumers</label>
+    <input type="range" min="0" max="100" value="50" id="primary">
+    <span id="primVal">50</span>
+  </div>
+
+  <div class="control">
+    <label>🦊 Secondary Consumers</label>
+    <input type="range" min="0" max="100" value="30" id="secondary">
+    <span id="secVal">30</span>
+  </div>
+</section>
+
+<section class="stability">
+  <h2>Ecosystem Stability</h2>
+  <div id="statusBox">Stable ✅</div>
+  <p id="reasoning"></p>
+</section>
+
+<hr>
+
+<section class="elimination">
+  <h2>Activity: Eliminate One Organism</h2>
+
+  <p><strong>Step 1:</strong> Choose one organism to remove from the food chain.</p>
+
+  <select id="eliminateChoice">
+    <option value="">-- Select an organism --</option>
+    <option value="producer">🌱 Producer</option>
+    <option value="primary">🐇 Primary Consumer</option>
+    <option value="secondary">🦊 Secondary Consumer</option>
+  </select>
+
+  <p><strong>Step 2:</strong> What do YOU think will happen?</p>
+  <textarea id="studentPrediction" placeholder="I think that..."></textarea>
+
+  <button onclick="checkElimination()">Check My Thinking</button>
+
+  <p id="eliminationFeedback"></p>
+</section>
+
+<button onclick="resetEcosystem()">Reset Ecosystem</button>
