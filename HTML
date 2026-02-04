@@ -1,61 +1,76 @@
-<h1>Ecosystem Stability Simulator</h1>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ecosystem Stability Simulator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-<p class="directions">
-  Adjust the ecosystem or eliminate one organism. Observe how energy flow and population balance affect stability.
-</p>
+  <h1>Ecosystem Stability Simulator</h1>
 
-<section class="controls">
-  <div class="control">
-    <label>🌞 Sunlight (Energy Input)</label>
-    <input type="range" min="0" max="100" value="70" id="sunlight">
-    <span id="sunVal">70</span>
-  </div>
+  <p class="directions">
+    Adjust the ecosystem or eliminate one organism. Observe how energy flow and population balance affect stability.
+  </p>
 
-  <div class="control">
-    <label>🌱 Producers</label>
-    <input type="range" min="0" max="100" value="70" id="producers">
-    <span id="prodVal">70</span>
-  </div>
+  <section class="controls">
+    <div class="control">
+      <label>🌞 Sunlight (Energy Input)</label>
+      <input type="range" min="0" max="100" value="70" id="sunlight">
+      <span id="sunVal">70</span>
+    </div>
 
-  <div class="control">
-    <label>🐇 Primary Consumers</label>
-    <input type="range" min="0" max="100" value="50" id="primary">
-    <span id="primVal">50</span>
-  </div>
+    <div class="control">
+      <label>🌱 Producers</label>
+      <input type="range" min="0" max="100" value="70" id="producers">
+      <span id="prodVal">70</span>
+    </div>
 
-  <div class="control">
-    <label>🦊 Secondary Consumers</label>
-    <input type="range" min="0" max="100" value="30" id="secondary">
-    <span id="secVal">30</span>
-  </div>
-</section>
+    <div class="control">
+      <label>🐇 Primary Consumers</label>
+      <input type="range" min="0" max="100" value="50" id="primary">
+      <span id="primVal">50</span>
+    </div>
 
-<section class="stability">
-  <h2>Ecosystem Stability</h2>
-  <div id="statusBox">Stable ✅</div>
-  <p id="reasoning"></p>
-</section>
+    <div class="control">
+      <label>🦊 Secondary Consumers</label>
+      <input type="range" min="0" max="100" value="30" id="secondary">
+      <span id="secVal">30</span>
+    </div>
+  </section>
 
-<hr>
+  <section class="stability">
+    <h2>Ecosystem Stability</h2>
+    <div id="statusBox">Stable ✅</div>
+    <p id="reasoning"></p>
+  </section>
 
-<section class="elimination">
-  <h2>Activity: Eliminate One Organism</h2>
+  <hr>
 
-  <p><strong>Step 1:</strong> Choose one organism to remove from the food chain.</p>
+  <section class="elimination">
+    <h2>Activity: Eliminate One Organism</h2>
 
-  <select id="eliminateChoice">
-    <option value="">-- Select an organism --</option>
-    <option value="producer">🌱 Producer</option>
-    <option value="primary">🐇 Primary Consumer</option>
-    <option value="secondary">🦊 Secondary Consumer</option>
-  </select>
+    <p><strong>Step 1:</strong> Choose one organism to remove from the food chain.</p>
 
-  <p><strong>Step 2:</strong> What do YOU think will happen?</p>
-  <textarea id="studentPrediction" placeholder="I think that..."></textarea>
+    <select id="eliminateChoice">
+      <option value="">-- Select an organism --</option>
+      <option value="producer">🌱 Producer</option>
+      <option value="primary">🐇 Primary Consumer</option>
+      <option value="secondary">🦊 Secondary Consumer</option>
+    </select>
 
-  <button onclick="checkElimination()">Check My Thinking</button>
+    <p><strong>Step 2:</strong> What do YOU think will happen?</p>
+    <textarea id="studentPrediction" placeholder="I think that..."></textarea>
 
-  <p id="eliminationFeedback"></p>
-</section>
+    <button id="checkBtn">Check My Thinking</button>
 
-<button onclick="resetEcosystem()">Reset Ecosystem</button>
+    <p id="eliminationFeedback"></p>
+  </section>
+
+  <button id="resetBtn">Reset Ecosystem</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
