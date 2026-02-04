@@ -1,31 +1,53 @@
-const sliders = document.querySelectorAll("input[type='range']");
+// Grab elements safely (works everywhere, including GitHub Pages)
+const sunlight = document.getElementById("sunlight");
+const producers = document.getElementById("producers");
+const primary = document.getElementById("primary");
+const secondary = document.getElementById("secondary");
+
+const sunVal = document.getElementById("sunVal");
+const prodVal = document.getElementById("prodVal");
+const primVal = document.getElementById("primVal");
+const secVal = document.getElementById("secVal");
+
 const statusBox = document.getElementById("statusBox");
 const reasoning = document.getElementById("reasoning");
+
+const eliminateChoice = document.getElementById("eliminateChoice");
+const studentPrediction = document.getElementById("studentPrediction");
+const eliminationFeedback = document.getElementById("eliminationFeedback");
+
+const checkBtn = document.getElementById("checkBtn");
+const resetBtn = document.getElementById("resetBtn");
+
+const sliders = document.querySelectorAll("input[type='range']");
 
 sliders.forEach(slider => {
   slider.addEventListener("input", updateEcosystem);
 });
 
+checkBtn.addEventListener("click", checkElimination);
+resetBtn.addEventListener("click", resetEcosystem);
+
 function updateEcosystem() {
-  const sunlight = sunlightVal();
-  const producers = producersVal();
-  const primary = primaryVal();
-  const secondary = secondaryVal();
+  const sunlightValue = sunlightVal();
+  const producersValue = producersVal();
+  const primaryValue = primaryVal();
+  const secondaryValue = secondaryVal();
 
   updateLabels();
 
   let reasons = [];
 
-  if (sunlight < 30) {
+  if (sunlightValue < 30) {
     reasons.push("There is not enough sunlight for producers to make food.");
   }
-  if (producers < 30) {
+  if (producersValue < 30) {
     reasons.push("Too few producers means not enough energy enters the ecosystem.");
   }
-  if (primary > producers) {
+  if (primaryValue > producersValue) {
     reasons.push("There are more primary consumers than available producers.");
   }
-  if (secondary > primary) {
+  if (secondaryValue > primaryValue) {
     reasons.push("Secondary consumers do not have enough prey to survive.");
   }
 
@@ -55,25 +77,24 @@ function secondaryVal() { return +secondary.value; }
 // ELIMINATION ACTIVITY
 function checkElimination() {
   const choice = eliminateChoice.value;
-  const feedback = document.getElementById("eliminationFeedback");
 
   if (!choice) {
-    feedback.innerText = "Please select an organism to eliminate.";
+    eliminationFeedback.innerText = "Please select an organism to eliminate.";
     return;
   }
 
   if (choice === "producer") {
-    feedback.innerHTML =
+    eliminationFeedback.innerHTML =
       "✅ <strong>Correct Explanation:</strong> Without producers, energy cannot enter the ecosystem. All consumers will eventually die.";
   }
 
   if (choice === "primary") {
-    feedback.innerHTML =
+    eliminationFeedback.innerHTML =
       "✅ <strong>Correct Explanation:</strong> Producers may increase, but secondary consumers will lose their food source and decline.";
   }
 
   if (choice === "secondary") {
-    feedback.innerHTML =
+    eliminationFeedback.innerHTML =
       "✅ <strong>Correct Explanation:</strong> Primary consumers may increase, which can lead to overconsumption of producers.";
   }
 }
@@ -91,3 +112,4 @@ function resetEcosystem() {
 }
 
 updateEcosystem();
+
